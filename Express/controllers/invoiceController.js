@@ -64,13 +64,13 @@ class InvoiceController {
             if (data == null) {
                 return res
                     .status(404)
-                    .json({ success: false, errors: ["Invoice not found"] });
+                    .json({ success: false, errors: "Invoice not found" });
             } else {
                 res.status(200).json(paging(data, page, limit))
             }
         } catch (error) {
             console.log(error)
-            res.status(400).json({ message: error })
+            res.status(400).json({ success: false, message: error })
         }
     }
 
@@ -102,13 +102,13 @@ class InvoiceController {
 
             let profit = total - cogs
             if (data.length == 0) {
-                res.status(404).json({ messsage: ["Invoice Not Found"] })
+                res.status(404).json({ success: false, messsage: "Invoice Not Found" })
             } else {
                 res.status(200).json({ data, profit })
             }
         } catch (error) {
             console.log(error)
-            res.status(400).json({ message: error })
+            res.status(400).json({ success: false, message: error })
         }
     }
 
@@ -176,13 +176,13 @@ class InvoiceController {
             if (data == null || data.count == 0) {
                 return res
                     .status(404)
-                    .json({ success: false, errors: ["Invoice not found"] });
+                    .json({ success: false, message: "Invoice not found" });
             } else {
                 res.status(200).json(paging(data, page, limit))
             }
         } catch (error) {
             console.log(error)
-            res.status(400).json({ message: error })
+            res.status(400).json({ success: false, message: error })
         }
     }
 
@@ -209,7 +209,7 @@ class InvoiceController {
         } catch (error) {
             console.log(error);
             next(error)
-            res.status(400).json({ message: error });
+            res.status(400).json({ success: false, message: error });
         }
     }
 
@@ -235,7 +235,7 @@ class InvoiceController {
         } catch (error) {
             console.log(error);
             next(error)
-            res.status(400).json({ message: error });
+            res.status(400).json({ success: false, message: error });
         }
     }
 
@@ -252,12 +252,12 @@ class InvoiceController {
                 }
             })
             if (!data) {
-                return res.status(404).json({ message: ["Invoice not found"] });
+                return res.status(404).json({ success: false, message: "Invoice not found" });
             }
-            res.status(200).json({ message: ["Success delete your Invoice"] });
+            res.status(200).json({ message: "Success delete your Invoice" });
         } catch (error) {
             console.log(error);
-            res.status(500).json({ errors: ["Internal Server Error"] });
+            res.status(500).json({ success: false, errors: "Internal Server Error" });
         }
     }
 }
