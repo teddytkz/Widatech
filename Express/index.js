@@ -1,4 +1,5 @@
 const express = require('express')
+const fileUpload = require('express-fileupload')
 
 const { sequelize } = require('./models')
 
@@ -9,6 +10,7 @@ const app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({ useTempFiles: true }))
 
 app.use('/', routes)
 
