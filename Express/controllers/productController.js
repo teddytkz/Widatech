@@ -5,7 +5,7 @@ class ProductController {
         try {
             const dataProduct = await Product.findAndCountAll({
                 attributes: {
-                    exclude: ["createdAt", "deletedAt", "updatedAt"],
+                    exclude: ["createdAt", "updatedAt"],
                 },
             })
             const price = await Product.sum('totalPriceSold')
@@ -28,7 +28,7 @@ class ProductController {
                     id: req.params.id
                 },
                 attributes: {
-                    exclude: ["createdAt", "deletedAt", "updatedAt"],
+                    exclude: ["createdAt", "updatedAt"],
                 },
             })
             const price = dataProduct.totalPriceSold
@@ -41,6 +41,32 @@ class ProductController {
         } catch (error) {
             console.log(error)
             res.status(400).json({ success: false, message: "Bad request" })
+        }
+    }
+
+    async createProduct(req, res, next) {
+        try {
+            const { invoiceNo, itemName, quantity, totalCogs, totalPriceSold } = req.body
+            const addProduct = await Product.create({
+                invoiceNo: invoiceNo,
+                itemName: itemName,
+                quantity: quantity,
+                totalCogs: totalCogs,
+                totalPriceSold: totalPriceSold
+            })
+            const dataProduct = await Product.findOne({
+                where: {
+                    id: addProduct.id
+                },
+                attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                },
+            })
+            res.status(200).json({ data, message: 'Success Add Product' })
+        } catch (error) {
+            console.log(error);
+            next(error)
+            res.status(400).json({ success: false, message: error });
         }
     }
 }
