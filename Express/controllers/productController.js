@@ -71,7 +71,24 @@ class ProductController {
     }
 
     async updateProduct(req, res) {
-
+        try {
+            const updateProduct = await Product.update(req.body, {
+                where: {
+                    id: req.params.id
+                }
+            })
+            const productData = await Product.findOne({
+                where: {
+                    id: req.params.id
+                }, attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                },
+            })
+            res.status(200).json({ productData, message: "Success Update Product" })
+        } catch (error) {
+            console.log(error);
+            res.status(400).json({ success: false, message: error });
+        }
     }
 }
 
