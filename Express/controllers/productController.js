@@ -90,6 +90,28 @@ class ProductController {
             res.status(400).json({ success: false, message: error });
         }
     }
+
+    async deleteProduct(req, res) {
+        try {
+            const dataProduct = await Product.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+            const deleteProduct = await Product.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+            if (!deleteProduct) {
+                return res.status(400).json({ success: false, message: "Product Not Found" })
+            }
+            res.status(200).json({ dataProduct, message: "Success Delete Product" })
+        } catch (error) {
+            console.log(error);
+            res.status(400).json({ success: false, message: error });
+        }
+    }
 }
 
 module.exports = new ProductController()
