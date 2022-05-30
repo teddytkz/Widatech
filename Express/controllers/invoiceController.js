@@ -15,7 +15,7 @@ class InvoiceController {
             const { limit, offset } = pagination(page, size)
             const data = await Invoice.findAndCountAll({
                 attributes: {
-                    exclude: ["createdAt", "deletedAt", "updatedAt"]
+                    exclude: ["createdAt", "updatedAt"]
                 },
                 include: [
                     {
@@ -81,7 +81,7 @@ class InvoiceController {
                     invoiceNo: req.params.id
                 },
                 attributes: {
-                    exclude: ["createdAt", "deletedAt", "updatedAt"]
+                    exclude: ["createdAt", "updatedAt"]
                 },
                 include: [
                     {
@@ -127,7 +127,7 @@ class InvoiceController {
                     date: req.params.date
                 },
                 attributes: {
-                    exclude: ["createdAt", "deletedAt", "updatedAt"]
+                    exclude: ["createdAt", "updatedAt"]
                 },
                 include: [
                     {
@@ -201,7 +201,7 @@ class InvoiceController {
             const data = await Invoice.findOne({
                 where: { id: insertInvoice.id },
                 attributes: {
-                    exclude: ["createdAt", "deletedAt", "updatedAt"],
+                    exclude: ["createdAt", "updatedAt"],
                 },
             });
 
@@ -228,7 +228,7 @@ class InvoiceController {
             const data = await Invoice.findOne({
                 where: { id: req.params.id },
                 attributes: {
-                    exclude: ["createdAt", "deletedAt", "updatedAt"],
+                    exclude: ["createdAt", "updatedAt"],
                 },
             });
             res.status(200).json({ data, message: "Succes Update Invoice" });
