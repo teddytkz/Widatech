@@ -10,7 +10,7 @@ exports.productValidator = async (req, res, next) => {
             itemName: yup.string().min(5).required(),
             quantity: yup.number().min(1).required(),
             totalCogs: yup.number().min(0).required(),
-            totalPriceSold: yup.number().mi0(1).required()
+            totalPriceSold: yup.number().min(0).required()
         })
 
         await productSchema.validate(req.body, { abortEarly: false })

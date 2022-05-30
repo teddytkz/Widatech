@@ -62,12 +62,16 @@ class ProductController {
                     exclude: ["createdAt", "updatedAt"],
                 },
             })
-            res.status(200).json({ data, message: 'Success Add Product' })
+            res.status(200).json({ dataProduct, message: 'Success Add Product' })
         } catch (error) {
             console.log(error);
             next(error)
             res.status(400).json({ success: false, message: error });
         }
+    }
+
+    async updateProduct(req, res) {
+
     }
 }
 
