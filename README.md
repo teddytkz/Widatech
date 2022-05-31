@@ -1,3 +1,3 @@
 # Widatech
 
-Postman Sample Request on folder Postman
+Postman Collection located on folder Express/postman
